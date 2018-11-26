@@ -146,9 +146,10 @@ list.each do |gene| #loop of genes. Retreive info
         
         #Same but for chromosomes
         #Here I added some extra . because according to ensembl, there should be 9 columns in GFF to visualize it. And points show "empty" fieds
+        #If its a minus strand, the position will be counted from the end and the begining of repeat will be where the finish would have been if it was on plus strand
         if /"-"/.match(hash.to_s)
           chr_minus_ini = end_chr.to_i - finish + 1
-          chr_minus_end = chr_minus_ini + repeat.length 
+          chr_minus_end = chr_minus_ini + repeat.length #and then just add the lenght of repeat to get the end coordinate
           print "#{name_chr}:#{number_chr}\t#{gene}\trepeat_region\t #{chr_minus_ini}\t #{chr_minus_end} \t-\t.\t.\n\n"
           chromosomes_file.puts "#{number_chr}\t.\trepeat_region\t#{chr_minus_ini}\t#{chr_minus_end}\t.\t-\t.\t.\n"
         else
